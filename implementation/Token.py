@@ -120,6 +120,11 @@ class TokenTestCase(unittest.TestCase):
         token3 = Token.FromString("Minus")
         self.assertTrue(str(token3) == "Minus")
 
+    def test_FromString_None(self):  # pylint: disable=C0103
+        """Token.FromString -> None"""
+        token = Token.FromString("Bad")
+        self.assertTrue(token3 is None)
+
 
 if __name__ == "__main__":
     unittest.main()

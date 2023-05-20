@@ -157,6 +157,20 @@ class Parser:
 
         raise RuntimeError("error token in primary", token)
 
+class UnaryExpressionTestCase(unittest.TestCase):
+    def test_bad_operation(self):  # pylint: disable=C0103
+        number = NumberExpression(15)
+        expr = UnaryExpression(number, TokenMultiply())
+        with self.assertRaises(RuntimeError):
+            expr.Evaluate()
+
+class BinaryExpressionTestCase(unittest.TestCase):
+    def test_bad_operation(self):  # pylint: disable=C0103
+        left  = NumberExpression(15)  # noqa: E221
+        right = NumberExpression(50)  # noqa: E221
+        expr = BinaryExpression(left, right, Token("Bad"))
+        with self.assertRaises(RuntimeError):
+            expr.Evaluate()    
 
 class ParserTestCase(unittest.TestCase):
     """Parser test class"""
@@ -184,6 +198,24 @@ class ParserTestCase(unittest.TestCase):
             expected = eval(expected)  # pylint: disable=W0123
             self.assertEqual(actual, expected)
 
+    def test_bad_primary1(self):
+        parser = Parser([])
+        with self.assertRaises(RuntimeError) as cm:
+            expr = parser.Primary()
+
+        the_exception = cm.exception
+        the_string = "expected token not None in primary"
+        self.assertEqual(str(the_exception), the_string)
+
+    def test_bad_primary2(self):
+        parser = Parser([TokenMinus(), Token("Number", 5)])
+        with self.assertRaises(RuntimeError) as cm:
+            expr = parser.Primary()
+
+        the_exception = cm.exception
+        the_string = "('error token in primary',"
+        self.assertTrue(str(the_exception).startswith(the_string))        
+
 
 if __name__ == "__main__":
     this_file_directory = os.path.dirname(__file__)
@@ -196,5 +228,11 @@ if __name__ == "__main__":
         for entity in iterator:
             if entity.is_file():
                 suite.addTest(ParserTestCase("TestFile", entity.path))
+
+    suite.addTest(UnaryExpressionTestCase("test_bad_operation"))
+    suite.addTest(BinaryExpressionTestCase("test_bad_operation"))
+
+    suite.addTest(ParserTestCase("test_bad_primary1", None))
+    suite.addTest(ParserTestCase("test_bad_primary2", None))
 
     unittest.TextTestRunner(verbosity=2).run(suite)
