@@ -32,6 +32,7 @@ jobs:
           mypy .
       - name: coverage run
         run: |
+          coverage run -p implementation/Token.py
           coverage run -p implementation/Lexer.py
           coverage run -p implementation/Parser.py
           coverage run -p implementation/main.py

@@ -1,4 +1,5 @@
 """Token implementation"""
+import unittest
 
 
 class Token:
@@ -101,7 +102,24 @@ class TokenRParenthese(Token):  # pylint: disable=R0903
         super().__init__("RParenthese", None, line, column)
 
 
+class TokenTestCase(unittest.TestCase):
+    """Token test class"""
+    def test_eq_tokens(self):  # pylint: disable=C0103
+        """test [token1 == token2]"""
+        token1 = Token("Plus")
+        token2 = Token("Plus")
+        self.assertTrue(token1 == token2)
+
+    def test_eq_str(self):  # pylint: disable=C0103
+        """test [token1 == string]"""
+        token3 = Token.FromString("Minus")
+        self.assertTrue(token3 == "Minus")
+
+    def test_repr(self):  # pylint: disable=C0103
+        """test str(token) == ..."""
+        token3 = Token.FromString("Minus")
+        self.assertTrue(str(token3) == "Minus")
+
+
 if __name__ == "__main__":
-    token1 = Token("Plus")
-    token2 = Token("Plus")
-    print(token1 == token2)
+    unittest.main()

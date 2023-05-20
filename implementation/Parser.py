@@ -39,7 +39,7 @@ class UnaryExpression(Expression):  # pylint: disable=R0903
         if self.operation == TokenMinus():
             return -self.right.Evaluate()
 
-        return self.right.Evaluate()
+        raise RuntimeError("UnaryExpression: bad operation", self.operation)
 
 
 class BinaryExpression(Expression):  # pylint: disable=R0903
@@ -60,7 +60,7 @@ class BinaryExpression(Expression):  # pylint: disable=R0903
         if self.operation == TokenDivision():
             return self.left.Evaluate() / self.right.Evaluate()
 
-        raise RuntimeError("bad operation", self.operation)
+        raise RuntimeError("BinaryExpression: bad operation", self.operation)
 
 
 class Parser:
@@ -131,7 +131,7 @@ class Parser:
         token = self.PeekToken()
         if token == TokenPlus():
             self.NextToken()
-            return self.Primary()
+            return UnaryExpression(self.Primary(), TokenPlus())
         if token == TokenMinus():
             self.NextToken()
             return UnaryExpression(self.Primary(), TokenMinus())
