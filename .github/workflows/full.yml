@@ -30,3 +30,12 @@ jobs:
       - name: mypy run
         run: |
           mypy .
+      - name: coverage run
+        run: |
+          coverage run lexer.py
+          coverage report
+          coverage run parser.py
+          coverage report
+      - name: cProfile run
+        run: |
+          python3 -m cProfile -s time parser.py
