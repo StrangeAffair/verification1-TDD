@@ -1,0 +1,4 @@
+input:
+[Number(1234), Plus, Number(35)]
+output:
+Fraction(1269, 1)
