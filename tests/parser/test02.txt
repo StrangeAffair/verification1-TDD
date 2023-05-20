@@ -1,5 +1,5 @@
 input:
-[LParenthese, Number(2), Plus, Number(3), RParenthese, Multiply, Number(5)]
+["LParenthese", "Number(2)", "Plus", "Number(3)", "RParenthese", "Multiply", "Number(5)"]
 output:
 Fraction(25, 1)
 

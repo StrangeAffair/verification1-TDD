@@ -1,4 +1,4 @@
 input:
-[LParenthese, Number(2), Plus, Number(3), RParenthese, Division, Number(5)]
+["LParenthese", "Number(2)", "Plus", "Number(3)", "RParenthese", "Division", "Number(5)"]
 output:
 Fraction(1, 1)

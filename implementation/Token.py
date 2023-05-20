@@ -26,10 +26,31 @@ class Token:
         if isinstance(other, str):
             return self.type == other
 
-        if isinstance(other, Token):
-            return (self.type == other.type) and (self.data == other.data)
+        return (self.type == other.type) and (self.data == other.data)
 
-        return False
+    @staticmethod
+    def FromString(string):  # pylint: disable=R0911
+        """get Token from string"""
+        string = string.strip()
+        if string == "Plus":
+            return TokenPlus()
+        if string == "Minus":
+            return TokenMinus()
+        if string == "Multiply":
+            return TokenMultiply()
+        if string == "Division":
+            return TokenDivision()
+
+        if string == "LParenthese":
+            return TokenLParenthese()
+        if string == "RParenthese":
+            return TokenRParenthese()
+
+        if string.startswith("Number"):
+            data = int(string[len("Number") + 1:-1])
+            return Token("Number", data)
+
+        return None
 
 
 class TokenPlus(Token):  # pylint: disable=R0903
@@ -47,6 +68,7 @@ class TokenMinus(Token):  # pylint: disable=R0903
                  column: int | None = None):
         super().__init__("Minus", None, line, column)
 
+
 class TokenMultiply(Token):  # pylint: disable=R0903
     """Operator '*' token"""
     def __init__(self,
@@ -54,12 +76,14 @@ class TokenMultiply(Token):  # pylint: disable=R0903
                  column: int | None = None):
         super().__init__("Multiply", None, line, column)
 
+
 class TokenDivision(Token):  # pylint: disable=R0903
     """Operator '/' token"""
     def __init__(self,
                  line: int | None = None,
                  column: int | None = None):
         super().__init__("Division", None, line, column)
+
 
 class TokenLParenthese(Token):  # pylint: disable=R0903
     """'(' token"""
