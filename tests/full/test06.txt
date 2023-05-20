@@ -1,0 +1,4 @@
+input:
+(24 + -4) / 5
+output:
+Fraction(4, 1)
