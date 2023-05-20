@@ -1,0 +1,4 @@
+input:
+(2 + 3) / 5
+output:
+[LParenthese, Number(2), Plus, Number(3), RParenthese, Division, Number(5)]

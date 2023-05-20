@@ -47,6 +47,19 @@ class TokenMinus(Token):  # pylint: disable=R0903
                  column: int | None = None):
         super().__init__("Minus", None, line, column)
 
+class TokenMultiply(Token):  # pylint: disable=R0903
+    """Operator '*' token"""
+    def __init__(self,
+                 line: int | None = None,
+                 column: int | None = None):
+        super().__init__("Multiply", None, line, column)
+
+class TokenDivision(Token):  # pylint: disable=R0903
+    """Operator '/' token"""
+    def __init__(self,
+                 line: int | None = None,
+                 column: int | None = None):
+        super().__init__("Division", None, line, column)
 
 class TokenLParenthese(Token):  # pylint: disable=R0903
     """'(' token"""

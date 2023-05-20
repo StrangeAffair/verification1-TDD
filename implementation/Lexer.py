@@ -2,7 +2,7 @@
 import unittest
 import os
 from Token import Token
-from Token import TokenPlus, TokenMinus
+from Token import TokenPlus, TokenMinus, TokenMultiply, TokenDivision
 from Token import TokenLParenthese, TokenRParenthese
 
 
@@ -63,6 +63,12 @@ class Lexer:
         if char == '-':
             self.NextChar()
             return TokenMinus(line, column)
+        if char == '*':
+            self.NextChar()
+            return TokenMultiply(line, column)
+        if char == '/':
+            self.NextChar()
+            return TokenDivision(line, column)
 
         if char == '(':
             self.NextChar()
@@ -95,12 +101,12 @@ class LexerTestCase(unittest.TestCase):
         print(self.path)
         with open(self.path, encoding="utf-8") as file:
             lines = file.readlines()
-            self.assertEqual(lines[0], "input:\n")
-            self.assertEqual(lines[2], "output:\n")
+            self.assertEqual(lines[0].strip(), "input:")
+            self.assertEqual(lines[2].strip(), "output:")
 
             lexer  = Lexer(lines[1])  # noqa: E221
             result = lexer.Tokens()
-            self.assertEqual(str(result), lines[3][:-1])
+            self.assertEqual(str(result), lines[3].strip())
 
 
 if __name__ == "__main__":
