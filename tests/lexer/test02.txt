@@ -1,0 +1,4 @@
+input:
+1234 + 35
+output:
+[Number(1234), Plus, Number(35)]

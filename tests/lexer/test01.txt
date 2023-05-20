@@ -1,4 +1,4 @@
 input:
 1234
 output:
-1234
+[Number(1234)]
