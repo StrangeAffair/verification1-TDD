@@ -110,8 +110,13 @@ class LexerTestCase(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    this_file_directory = os.path.dirname(__file__)
+    base_directory = os.path.join(this_file_directory, '..')
+    base_directory = os.path.normpath(base_directory)
+    tests_directory = os.path.join(base_directory, 'tests', 'lexer')
+
     suite = unittest.TestSuite()
-    with os.scandir("../tests/lexer") as iterator:
+    with os.scandir(tests_directory) as iterator:
         for entity in iterator:
             if entity.is_file():
                 suite.addTest(LexerTestCase("TestFile", entity.path))

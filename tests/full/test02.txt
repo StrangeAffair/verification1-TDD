@@ -1,0 +1,4 @@
+input:
+1234 + 35
+output:
+Fraction(1269, 1)

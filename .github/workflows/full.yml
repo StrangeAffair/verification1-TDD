@@ -32,10 +32,11 @@ jobs:
           mypy .
       - name: coverage run
         run: |
-          coverage run lexer.py
-          coverage report
-          coverage run parser.py
+          coverage run -p implementation/Lexer.py
+          coverage run -p implementation/Parser.py
+          coverage run -p implementation/main.py
+          coverage combine
           coverage report
       - name: cProfile run
         run: |
-          python3 -m cProfile -s time parser.py
+          python3 -m cProfile -s time implementation/main.py

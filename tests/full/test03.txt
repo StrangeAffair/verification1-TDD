@@ -1,0 +1,4 @@
+input:
+(2 + 3) * 5
+output:
+Fraction(25, 1)
