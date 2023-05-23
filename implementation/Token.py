@@ -117,13 +117,13 @@ class TokenTestCase(unittest.TestCase):
 
     def test_repr(self):  # pylint: disable=C0103
         """test str(token) == ..."""
-        token3 = Token.FromString("Minus")
-        self.assertTrue(str(token3) == "Minus")
+        token = Token.FromString("Minus")
+        self.assertTrue(str(token) == "Minus")
 
     def test_FromString_None(self):  # pylint: disable=C0103
         """Token.FromString -> None"""
         token = Token.FromString("Bad")
-        self.assertTrue(token3 is None)
+        self.assertTrue(token is None)
 
 
 if __name__ == "__main__":
