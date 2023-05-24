@@ -32,10 +32,10 @@ jobs:
           mypy .
       - name: coverage run
         run: |
-          coverage run -p implementation/Token.py
-          coverage run -p implementation/Lexer.py
-          coverage run -p implementation/Parser.py
-          coverage run -p implementation/main.py
+          coverage run -p --branch implementation/Token.py
+          coverage run -p --branch implementation/Lexer.py
+          coverage run -p --branch implementation/Parser.py
+          coverage run -p --branch implementation/main.py
           coverage combine
           coverage report
       - name: cProfile run
